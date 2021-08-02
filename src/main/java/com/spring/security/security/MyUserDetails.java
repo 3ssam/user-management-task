@@ -24,13 +24,9 @@ public class MyUserDetails implements UserDetails {
         this.email = user.getEmail();
         this.password = user.getPassword();
         this.activated = user.getActivated();
-
         this.authorities = Arrays.stream(user.getRole().split(","))
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
-
-        System.out.println(authorities);
-
     }
 
     @Override
