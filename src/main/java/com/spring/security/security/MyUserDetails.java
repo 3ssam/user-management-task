@@ -1,6 +1,8 @@
 package com.spring.security.security;
 
 import com.spring.security.models.User;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,6 +12,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Builder
+@AllArgsConstructor
 public class MyUserDetails implements UserDetails {
 
 
@@ -29,9 +33,24 @@ public class MyUserDetails implements UserDetails {
                 .collect(Collectors.toList());
     }
 
+    public MyUserDetails() {
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Boolean getActivated() {
+        return activated;
     }
 
     @Override
