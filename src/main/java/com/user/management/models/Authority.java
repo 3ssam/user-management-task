@@ -9,11 +9,8 @@ import javax.persistence.*;
 @Setter
 @Entity
 @Table(name = "authority")
-public class Authority {
+public class Authority extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     @Column(nullable = false, unique = true)
     private String name;
 

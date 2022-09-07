@@ -8,10 +8,7 @@ import javax.persistence.*;
 @Setter
 @Getter
 @Entity
-public class User  {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class User extends BaseEntity {
 
     @Column(nullable = false)
     private String email;
@@ -27,7 +24,6 @@ public class User  {
 
     @Column(nullable = false)
     protected String name;
-
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id", referencedColumnName = "id")
