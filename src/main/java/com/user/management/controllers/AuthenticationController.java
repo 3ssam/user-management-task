@@ -1,8 +1,8 @@
-package com.spring.security.controllers;
+package com.user.management.controllers;
 
-import com.spring.security.security.AuthenticationRequest;
-import com.spring.security.security.AuthenticationResponse;
-import com.spring.security.security.JwtTokenProvider;
+import com.user.management.security.AuthenticationRequest;
+import com.user.management.security.AuthenticationResponse;
+import com.user.management.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
