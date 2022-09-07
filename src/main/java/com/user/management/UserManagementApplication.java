@@ -1,13 +1,13 @@
-package com.spring.security;
+package com.user.management;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringSecurityDemoApplication {
+public class UserManagementApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringSecurityDemoApplication.class, args);
+        SpringApplication.run(UserManagementApplication.class, args);
     }
 
 }
