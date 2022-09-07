@@ -1,15 +1,14 @@
-package com.spring.security.security;
+package com.user.management.security;
 
-import com.spring.security.models.User;
+import com.user.management.models.Authority;
+import com.user.management.models.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Builder
@@ -20,42 +19,28 @@ public class MyUserDetails implements UserDetails {
     private long id;
     private String email;
     private String password;
+    private String name;
     private Boolean activated;
-    private List<GrantedAuthority> authorities;
+    private Set<GrantedAuthority> authorities;
+
 
     public MyUserDetails(User user) {
         this.id = user.getId();
+        this.name = user.getName();
         this.email = user.getEmail();
         this.password = user.getPassword();
-        this.activated = user.getActivated();
-        this.authorities = Arrays.stream(user.getRole().split(","))
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());
+        this.authorities = collectAuthorities(user);
     }
 
     public MyUserDetails() {
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
-    }
-
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public Boolean getActivated() {
-        return activated;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
+    public String getName() {
+        return name;
     }
 
     @Override
@@ -64,22 +49,40 @@ public class MyUserDetails implements UserDetails {
     }
 
     @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
     public boolean isAccountNonExpired() {
-        return activated;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return activated;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return activated;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return activated;
+        return true;
     }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return authorities;
+    }
+
+    private Set<GrantedAuthority> collectAuthorities(User user) {
+        if (user.getRole() == null)
+            return Collections.singleton(new SimpleGrantedAuthority("NO_AUTHORITIES"));
+        return user.getRole().getAuthorities().stream().map(Authority::getName)
+                .map(SimpleGrantedAuthority::new).collect(Collectors.toSet());
+    }
+
 }

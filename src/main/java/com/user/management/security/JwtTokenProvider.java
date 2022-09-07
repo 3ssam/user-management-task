@@ -1,4 +1,4 @@
-package com.spring.security.security;
+package com.user.management.security;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.SignatureException;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Log4j2
@@ -25,11 +25,11 @@ public class JwtTokenProvider {
 
     public String generateToken(Authentication authentication) {
         MyUserDetails principal = (MyUserDetails) authentication.getPrincipal();
-        var userScope = principal.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
+        var userScope = principal.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toSet());
         return Jwts.builder()
                 .setHeaderParam("typ", "Bearer")
                 .setSubject(String.valueOf(principal.getId()))
-                .claim("usr", principal.getUsername())
+                .claim("usr", principal.getName())
                 .claim("lgn", principal.getUsername())
                 .claim("scp", userScope)
                 .setIssuedAt(new Date(new Date().getTime() + expiration))
@@ -42,22 +42,15 @@ public class JwtTokenProvider {
         var builder = MyUserDetails.builder();
         builder.id(Long.valueOf(body.getSubject()));
         builder.email(body.get("lgn").toString());
+        builder.name(body.get("usr").toString());
         builder.authorities(getAuthorities(body.get("scp").toString()));
         return builder.build();
     }
 
-    public String getUserId(String token) {
-        return Jwts.parser().setSigningKey(secretKey).parseClaimsJwt(token).getBody().getSubject();
-    }
-
-    public String getCompanyId(String token) {
-        return Jwts.parser().setSigningKey(secretKey).parseClaimsJwt(token).getBody().get("cid").toString();
-    }
-
-    private List<GrantedAuthority> getAuthorities(String scp) {
+    private Set<GrantedAuthority> getAuthorities(String scp) {
         return Arrays.stream(scp.split(",")).map(n -> {
             return n.strip().replace(" ", "").replace("[", "").replace("]", "");
-        }).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+        }).map(SimpleGrantedAuthority::new).collect(Collectors.toSet());
     }
 
     public boolean isValidToken(String token) {

@@ -1,6 +1,6 @@
-package com.spring.security.security;
+package com.user.management.security;
 
-import com.spring.security.repositories.UserRepository;
+import com.user.management.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

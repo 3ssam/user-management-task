@@ -1,4 +1,4 @@
-package com.spring.security.security;
+package com.user.management.security;
 
 import lombok.Data;
 

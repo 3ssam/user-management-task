@@ -1,7 +1,7 @@
-package com.spring.security.security;
+package com.user.management.security;
 
-import com.spring.security.models.User;
-import com.spring.security.repositories.UserRepository;
+import com.user.management.models.User;
+import com.user.management.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,9 +19,7 @@ public class MyUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Optional<User> user = userRepository.findByEmail(email);
-
         user.orElseThrow(() -> new UsernameNotFoundException("Not found this Email " + email));
-
         return user.map(MyUserDetails::new).get();
     }
 }
