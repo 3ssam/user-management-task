@@ -1,6 +1,7 @@
-package com.spring.security.repositories;
+package com.user.management.repositories;
 
-import com.spring.security.models.User;
+import com.user.management.models.User;
+import com.user.management.projection.UserProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,4 +12,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     boolean existsByEmail(String email);
 
     Optional<User> findByEmail(String email);
+
+    UserProjection getUserById(Long id);
 }
