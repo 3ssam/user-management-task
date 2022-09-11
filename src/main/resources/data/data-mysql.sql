@@ -26,15 +26,25 @@ values (11, 'READ_Authorities', true, '2022-09-07 00:00:00.00', '2022-09-07 00:0
 INSERT INTO authority (id, name, status, created_at, updated_at, created_by, updated_by)
 values (12, 'CREATE_USER', true, '2022-09-07 00:00:00.00', '2022-09-07 00:00:00.00', 1, 1);
 
+INSERT INTO authority (id, name, status, created_at, updated_at, created_by, updated_by)
+values (13, 'CREATE_STUDENT', true, '2022-09-07 00:00:00.00', '2022-09-07 00:00:00.00', 1, 1);
+INSERT INTO authority (id, name, status, created_at, updated_at, created_by, updated_by)
+values (14, 'UPDATE_STUDENT', true, '2022-09-07 00:00:00.00', '2022-09-07 00:00:00.00', 1, 1);
+INSERT INTO authority (id, name, status, created_at, updated_at, created_by, updated_by)
+values (15, 'DELETE_STUDENT', true, '2022-09-07 00:00:00.00', '2022-09-07 00:00:00.00', 1, 1);
+INSERT INTO authority (id, name, status, created_at, updated_at, created_by, updated_by)
+values (16, 'READ_STUDENT', true, '2022-09-07 00:00:00.00', '2022-09-07 00:00:00.00', 1, 1);
+INSERT INTO authority (id, name, status, created_at, updated_at, created_by, updated_by)
+values (17, 'READ_ALL_STUDENTS', true, '2022-09-07 00:00:00.00', '2022-09-07 00:00:00.00', 1, 1);
+
+
 -- Roles
 INSERT INTO role (id, name, status, created_at, updated_at, created_by, updated_by)
 values (1, 'SUPER_ADMIN', true, '2022-09-07 00:00:00.00', '2022-09-07 00:00:00.00', 1, 1);
 INSERT INTO role (id, name, status, created_at, updated_at, created_by, updated_by)
 values (2, 'ADMIN', true, '2022-09-07 00:00:00.00', '2022-09-07 00:00:00.00', 1, 1);
 INSERT INTO role (id, name, status, created_at, updated_at, created_by, updated_by)
-values (3, 'USER', true, '2022-09-07 00:00:00.00', '2022-09-07 00:00:00.00', 1, 1);
-INSERT INTO role (id, name, status, created_at, updated_at, created_by, updated_by)
-values (4, 'DEVELOPER', true, '2022-09-07 00:00:00.00', '2022-09-07 00:00:00.00', 1, 1);
+values (3, 'STUDENT', true, '2022-09-07 00:00:00.00', '2022-09-07 00:00:00.00', 1, 1);
 
 -- Roles-Authorities
 -- Super Admin Authorities
@@ -62,6 +72,16 @@ INSERT INTO role_authority (role_id, authority_id)
 VALUES (1, 11);
 INSERT INTO role_authority (role_id, authority_id)
 VALUES (1, 12);
+INSERT INTO role_authority (role_id, authority_id)
+VALUES (1, 13);
+INSERT INTO role_authority (role_id, authority_id)
+VALUES (1, 14);
+INSERT INTO role_authority (role_id, authority_id)
+VALUES (1, 15);
+INSERT INTO role_authority (role_id, authority_id)
+VALUES (1, 16);
+INSERT INTO role_authority (role_id, authority_id)
+VALUES (1, 17);
 
 -- Admin Authorities
 INSERT INTO role_authority (role_id, authority_id)
@@ -85,21 +105,17 @@ VALUES (2, 9);
 INSERT INTO role_authority (role_id, authority_id)
 VALUES (2, 10);
 
--- User Authorities
-INSERT INTO role_authority (role_id, authority_id)
-VALUES (3, 7);
-INSERT INTO role_authority (role_id, authority_id)
-VALUES (3, 8);
-INSERT INTO role_authority (role_id, authority_id)
-VALUES (3, 9);
-INSERT INTO role_authority (role_id, authority_id)
-VALUES (3, 10);
-INSERT INTO role_authority (role_id, authority_id)
-VALUES (3, 11);
 
--- Developer Authorities
 INSERT INTO role_authority (role_id, authority_id)
-VALUES (4, 12);
+VALUES (3, 13);
+INSERT INTO role_authority (role_id, authority_id)
+VALUES (3, 14);
+INSERT INTO role_authority (role_id, authority_id)
+VALUES (3, 15);
+INSERT INTO role_authority (role_id, authority_id)
+VALUES (3, 16);
+INSERT INTO role_authority (role_id, authority_id)
+VALUES (3, 17);
 
 -- Users
 -- password for all user is 123456
@@ -118,17 +134,10 @@ values (2, 'Omar Ahmed', 'omar.ahmed@rayacorp.com',
         '$2a$10$DBTrOEC7LCBflu90yBg/8OBGiHK8dH3ddJGJp3ioneVrbGiUPKl1G', true, false, 2, '2022-09-07 00:00:00.00',
         '2022-09-07 00:00:00.00', 1, 1);
 
--- User
+-- Student User
 INSERT INTO user (id, name, email, password_hash, activated, suspended, role_id, created_at, updated_at, created_by,
                   updated_by)
-values (3, 'Ahmed Nasr', 'ahmed.nasr@rayacorp.com',
+values (3, 'Ahmed Essam', 'ahmed.essam@rayacorp.com',
         '$2a$10$DBTrOEC7LCBflu90yBg/8OBGiHK8dH3ddJGJp3ioneVrbGiUPKl1G', true, false, 3, '2022-09-07 00:00:00.00',
-        '2022-09-07 00:00:00.00', 1, 1);
-
--- Developer User
-INSERT INTO user (id, name, email, password_hash, activated, suspended, role_id, created_at, updated_at, created_by,
-                  updated_by)
-values (4, 'Yousef Rabie', 'yousef.rabie@rayacorp.com',
-        '$2a$10$DBTrOEC7LCBflu90yBg/8OBGiHK8dH3ddJGJp3ioneVrbGiUPKl1G', true, false, 4, '2022-09-07 00:00:00.00',
         '2022-09-07 00:00:00.00', 1, 1);
 
